@@ -304,6 +304,9 @@ def resolve_deps(repodir, level=0, self_update=True, overrideroots=None, skipdep
     parenttype = get_repo_type(repodir)
     _root = config.get("_root", {})
 
+    if parenttype is None:
+      vcs = 'hg'
+
     for key in sources.keys() + _root.keys():
       if key == parenttype or key is None and vcs != "*":
         vcs = key
