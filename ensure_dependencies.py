@@ -238,7 +238,7 @@ def get_repo_type(repo):
   for name, repotype in repo_types.iteritems():
     if repotype.istype(repo):
       return name
-  return None
+  return "hg"
 
 def ensure_repo(parentrepo, parenttype, target, type, root, sourcename):
   if os.path.exists(target):
@@ -303,9 +303,6 @@ def resolve_deps(repodir, level=0, self_update=True, overrideroots=None, skipdep
     target = safe_join(repodir, dir)
     parenttype = get_repo_type(repodir)
     _root = config.get("_root", {})
-
-    if parenttype is None:
-      vcs = 'hg'
 
     for key in sources.keys() + _root.keys():
       if key == parenttype or key is None and vcs != "*":
